@@ -20,6 +20,8 @@ class SecondDegree:
                         prov_a.append(n)
                         copy = copy.replace(n, "")
                     else:
+                        if len(prov_a) == 0:
+                            prov_a = "1"
                         copy = copy.replace("x**2", "")
                         break
             else:
@@ -35,7 +37,7 @@ class SecondDegree:
                             copy = copy.replace(n, "")
                     else:
                         if len(prov_b) == 0:
-                            prov_b = 1
+                            prov_b = "1"
                         copy = copy.replace("x", "")
                         break
             else:
@@ -69,6 +71,16 @@ class SecondDegree:
         y = self.a*(x**2) + self.b*x + self.c
         plt.plot(x,y)
         plt.plot(self.vertex[0], self.vertex[1], "o")
+        if self.a > 0:
+            plt.annotate(str(self.vertex),xy=(self.vertex[0]-2, self.vertex[1]-10))
+        else:
+            plt.annotate(str(self.vertex),xy=(self.vertex[0]-2, self.vertex[1]+10))
+
+        if self.vertex != None:
+            ax = plt.gca()
+            ax.spines['bottom'].set_position(('data',0))
+            plt.plot(self.roots[0], 0, "o")
+            plt.plot(self.roots[1], 0, "o")    
         plt.grid()
         plt.show()
     def show_info(self) -> None:
@@ -77,4 +89,4 @@ class SecondDegree:
         print(f"Its roots: {self.roots}")
         self.show_graph()
 
-pol = SecondDegree("6x**2+3x+5").show_info()
+pol = SecondDegree("1x**2+3x").show_info()
