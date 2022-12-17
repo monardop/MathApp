@@ -3,14 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class SecondDegree:
-    def __init__(self, x) -> None:
-        self.polynomial = x
-        #self.polynomial = input("Insert a second-degre polynomial (ax**2+bx+c): ")
+    def __init__(self) -> None:
+        self.polynomial = input("Insert a second-degre polynomial (ax**2+bx+c): ")
         self.a, self.b, self.c = self.set_parameters()
         self.vertex = self.get_vertex()
         self.roots = self.get_roots()
     def set_parameters(self):
         copy = self.polynomial
+        copy = copy.replace(" ", "")
         prov_a=[]
         prov_b=[]
         try:
@@ -18,7 +18,7 @@ class SecondDegree:
                 for n in copy:  #set prov_a
                     if n != "x":
                         prov_a.append(n)
-                        copy = copy.replace(n, "")
+                        copy = copy.replace(n, "",1)
                     else:
                         copy = copy.replace("x**2", "")
                         break
@@ -34,7 +34,7 @@ class SecondDegree:
                     if n !="x":
                         if n != "+":
                             prov_b.append(n)
-                            copy = copy.replace(n, "")
+                            copy = copy.replace(n, "",1)
                     else:
                         copy = copy.replace("x", "")
                         break
@@ -79,7 +79,7 @@ class SecondDegree:
         else:
             plt.annotate(str(self.vertex),xy=(self.vertex[0]-2, self.vertex[1]+10))
 
-        if self.vertex != None:
+        if self.roots != None:
             ax = plt.gca()
             ax.spines['bottom'].set_position(('data',0))
             plt.plot(self.roots[0], 0, "o")
@@ -87,10 +87,8 @@ class SecondDegree:
         plt.grid()
         plt.show()
     def show_info(self) -> None:
-        print(f"Your quadratic function: {self.polynomial}")
+        print(f"Your quadratic function: {self.a}x^2 + {self.b}x + {self.c}")
         print(f"Its vertex: {self.vertex}")
         print(f"Its roots: {self.roots}")
         print(f"y-axis intersection: (0,{self.c})")
         self.show_graph()
-
-pol = SecondDegree("x+3").show_info()
