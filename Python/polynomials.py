@@ -4,7 +4,7 @@ class SecondDegree:
     def __init__(self) -> None:
         self.polynomial = input("Insert a second-degre polynomial (ax**2+bx+c): ")
         self.a, self.b, self.c = self.set_parameters()
-        self.
+        self.vertex= self.get_vortex()
     def set_parameters(self):
         copy = self.polynomial
         prov_a=[]
@@ -34,11 +34,17 @@ class SecondDegree:
         c = int("".join(copy))
 
         return a,b,c
+    def get_vortex(self) -> tuple:
+        x_vortex= (-1*self.b) / (2*self.a)
+        y_vortex= self.a*(x_vortex**2) + self.b*(x_vortex) + self.c
+        return (x_vortex, y_vortex)
+    
     def get_roots(self):
         if (self.b**2 - 4*self.a*self.c) < 0:
             print("There are no real roots in this polynomial.")
             return 
         else:
+            pass
             
 
     
