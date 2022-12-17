@@ -20,14 +20,14 @@ class SecondDegree:
                         prov_a.append(n)
                         copy = copy.replace(n, "")
                     else:
-                        if len(prov_a) == 0:
-                            prov_a = "1"
                         copy = copy.replace("x**2", "")
                         break
             else:
                 prov_a = 0
-        except prov_a == 0:
+                len(prov_a)
+        except TypeError:
             print("This is not a quadratic function")
+            exit(1)
         else:
             if "x" in copy: #Set prov_b
                 for n in copy:
@@ -36,23 +36,26 @@ class SecondDegree:
                             prov_b.append(n)
                             copy = copy.replace(n, "")
                     else:
-                        if len(prov_b) == 0:
-                            prov_b = "1"
                         copy = copy.replace("x", "")
                         break
             else:
-                prov_b = 0
+                prov_b = "0"
             copy = copy.replace("+", "")    #set prov_c
 
             # Now I can get the real values
-            a = int("".join(prov_a))
-            b = int("".join(prov_b))
-            if len(copy) != 0:
-                c = int("".join(copy))
-            else:
-                c = 0
+            values = []
+            for n in [prov_a, prov_b]:
+                if len(n) !=0:
+                    values.append(int("".join(n)))
+                else:
+                    values.append(1)
 
-            return a,b,c
+            if len(copy) != 0:
+                values.append(int("".join(copy)))
+            else:
+                values.append(0)
+
+            return values
     def get_vertex(self) -> tuple:
         x_vortex = (-1*self.b) / (2*self.a)
         y_vortex = self.a*(x_vortex**2) + self.b*(x_vortex) + self.c
@@ -87,6 +90,7 @@ class SecondDegree:
         print(f"Your quadratic function: {self.polynomial}")
         print(f"Its vertex: {self.vertex}")
         print(f"Its roots: {self.roots}")
+        print(f"y-axis intersection: (0,{self.c})")
         self.show_graph()
 
-pol = SecondDegree("1x**2+3x").show_info()
+pol = SecondDegree("x+3").show_info()
