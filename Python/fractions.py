@@ -1,5 +1,5 @@
 class Fraction:
-    def __init__(self, dividend:int, divisor:int) -> None:
+    def __init__(self, dividend:int, divisor = 1) -> None:
         self.dividend = dividend
         self.divisor = divisor
         self.nominator, self.denominator = self.get_fract()
@@ -27,6 +27,10 @@ class Fraction:
         
         return int(nominator), int(denominator)
 
+    def __str__(self) -> str:
+        return f"{self.nominator}/{self.denominator}"
+
+class FractOperations(Fraction):
     def __add__(self, fract):
         """
         This function adds two fractions together and returns a new one. 
@@ -55,29 +59,32 @@ class Fraction:
 
     def __pow__(self, power:int):
         return Fraction(self.nominator**power, self.denominator**power)
+    def create_fraction(number: float) -> Fraction:
+        """
+        Esta función se encarga de crear una fracción con base en un número decimal
+        """
+        # First: I get the number of decimals
+        aux = str(number)
+        integer, decimal = aux.split(".")
+        
+        # Now I set the denominator
+        denominator = 10 ** len(decimal)
+        nominator = number * denominator
 
-    def sqrt(self) -> float:
-        new_nom = self.nominator ** (1/2)
-        new_den = self.denominator ** (1/2)
+        return Fraction(nominator, denominator)
+
+    def sqrt(fract: Fraction) -> float:
+        new_nom = fract.nominator ** (1/2)
+        new_den = fract.denominator ** (1/2)
         return (new_nom / new_den)
     
-    def cube_root(self) -> float:
-        new_nom = self.nominator ** (1/3)
-        new_den = self.denominator ** (1/3)
+    def cube_root(fract: Fraction) -> float:
+        new_nom = fract.nominator ** (1/3)
+        new_den = fract.denominator ** (1/3)
         return (new_nom / new_den)
 
-    def __str__(self) -> str:
-        return f"{self.nominator}/{self.denominator}"
+    def get_decimal(fraction: Fraction) -> float:
+        return fraction.nominator/fraction.denominator
 
-a = Fraction(950,350)
-print(a)
-
-b = Fraction(480,645)
-print(b)
-
-c = a-b
-print(c)
-print(a.sqrt())
-
-d = Fraction(270,80)
-print(d.cube_root())
+    def get_mix_fract(fraction: Fraction) -> str:
+        pass
