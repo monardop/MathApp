@@ -4,6 +4,7 @@ class Fraction:
         self.divisor = divisor
         self.nominator, self.denominator = self.get_fract()
 
+
     def get_fract(self)->tuple:
         nominator = self.dividend
         denominator = self.divisor
@@ -25,24 +26,32 @@ class Fraction:
                 break
         
         return int(nominator), int(denominator)
-    
+
     def __add__(self, fract):
         """
         This function adds two fractions together and returns a new one. 
         """
-        new_nominator = (self.nominator*fract.denominator)+(fract.nominator*self.denominator)
-        new_denominator = self.denominator*fract.denominator
+        new_nominator = (self.nominator * fract.denominator
+                        +fract.nominator * self.denominator)
+        new_denominator = self.denominator * fract.denominator
 
         return Fraction(new_nominator, new_denominator)
-    
+
     def __sub__(self, fract):
         """
         This function subtracts two fractions together and returns a new one. 
         """
-        new_nominator = (self.nominator*fract.denominator)-(fract.nominator*self.denominator)
-        new_denominator = self.denominator*fract.denominator
+        new_nominator = (self.nominator * fract.denominator
+                        - fract.nominator * self.denominator)
+        new_denominator = self.denominator * fract.denominator
 
         return Fraction(new_nominator, new_denominator)
+    
+    def __mul__(self, fract):
+        new_nominator = self.nominator * fract.nominator
+        new_denominator = self.denominator * fract.denominator
+
+        return Fraction(new_nominator, new_denominator)    
 
     def __str__(self) -> str:
         return f"{self.nominator}/{self.denominator}"
