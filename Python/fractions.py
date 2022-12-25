@@ -53,6 +53,19 @@ class Fraction:
 
         return Fraction(new_nominator, new_denominator)    
 
+    def __pow__(self, power:int):
+        return Fraction(self.nominator**power, self.denominator**power)
+
+    def sqrt(self) -> float:
+        new_nom = self.nominator ** (1/2)
+        new_den = self.denominator ** (1/2)
+        return (new_nom / new_den)
+    
+    def cube_root(self) -> float:
+        new_nom = self.nominator ** (1/3)
+        new_den = self.denominator ** (1/3)
+        return (new_nom / new_den)
+
     def __str__(self) -> str:
         return f"{self.nominator}/{self.denominator}"
 
@@ -64,3 +77,7 @@ print(b)
 
 c = a-b
 print(c)
+print(a.sqrt())
+
+d = Fraction(270,80)
+print(d.cube_root())
