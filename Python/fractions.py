@@ -5,8 +5,16 @@ class Fraction:
         self.nominator, self.denominator = self.get_fraction()
 
     def get_fraction(self) -> tuple:
+        """
+        This function get the simplified version of the division that the user put as an input
+        :return:
+        A fraction simplified
+        """
         nominator = self.dividend
         denominator = self.divisor
+
+        if nominator/denominator == int(nominator/denominator):
+            return int(nominator/denominator), 1
 
         while True:
             if nominator % 10 == 0 and denominator % 10 == 0:
@@ -27,19 +35,17 @@ class Fraction:
         return int(nominator), int(denominator)
 
     def __add__(self, fraction):
-        """
-        This function adds two fractions together and returns a new one. 
-        """
-        new_nominator = (self.nominator * fraction.denominator
-                         + fraction.nominator * self.denominator)
-        new_denominator = self.denominator * fraction.denominator
+        if fraction is int:
+            new_nominator = self.nominator + fraction * self.denominator
+            new_denominator = self.denominator
+        else:
+            new_nominator = (self.nominator * fraction.denominator
+                             + fraction.nominator * self.denominator)
+            new_denominator = self.denominator * fraction.denominator
 
         return Fraction(new_nominator, new_denominator)
 
     def __sub__(self, fraction):
-        """
-        This function subtracts two fractions together and returns a new one. 
-        """
         new_nominator = (self.nominator * fraction.denominator
                          - fraction.nominator * self.denominator)
         new_denominator = self.denominator * fraction.denominator
@@ -62,36 +68,38 @@ class Fraction:
             return f"{self.nominator}"
 
 
-class FractionOperations(Fraction):
+def create_fraction(number: float) -> Fraction:
+    """
+    This function returns a fraction from a float number.
+    """
+    # First: I get the number of decimals
+    aux = str(number)
+    integer, decimal = aux.split(".")
 
-    def create_fraction(number: float) -> Fraction:
-        """
-        This function returns a fraction from a float number.
-        """
-        # First: I get the number of decimals
-        aux = str(number)
-        integer, decimal = aux.split(".")
+    # Now I set the denominator
+    denominator = 10 ** len(decimal)
+    nominator = number * denominator
 
-        # Now I set the denominator
-        denominator = 10 ** len(decimal)
-        nominator = number * denominator
+    return Fraction(nominator, denominator)
 
-        return Fraction(nominator, denominator)
 
-    def sqrt(fraction: Fraction) -> float:
-        new_nom = fraction.nominator ** (1 / 2)
-        new_den = fraction.denominator ** (1 / 2)
-        return new_nom / new_den
+def sqrt(fraction: Fraction) -> float:
+    new_nom = fraction.nominator ** (1 / 2)
+    new_den = fraction.denominator ** (1 / 2)
+    return new_nom / new_den
 
-    def cube_root(fraction: Fraction) -> float:
-        new_nom = fraction.nominator ** (1 / 3)
-        new_den = fraction.denominator ** (1 / 3)
-        return new_nom / new_den
 
-    def get_decimal(fraction: Fraction) -> float:
-        return fraction.nominator / fraction.denominator
+def cube_root(fraction: Fraction) -> float:
+    new_nom = fraction.nominator ** (1 / 3)
+    new_den = fraction.denominator ** (1 / 3)
+    return new_nom / new_den
 
-    def get_mix_fraction(fraction: Fraction) -> str:
-        pass
-        # TODO: mixed fractions
-        # TODO: create a function that add/sub ints to fractions
+
+def get_decimal(fraction: Fraction) -> float:
+    return fraction.nominator / fraction.denominator
+
+
+def get_mix_fraction(fraction: Fraction) -> str:
+    pass
+    # TODO: mixed fractions
+    # TODO: create a function that add/sub ints to fractions
