@@ -88,8 +88,11 @@ class Fraction:
         return Fraction(new_nominator, new_denominator)
 
     def __pow__(self, power):
-        return Fraction(self.nominator ** power, self.denominator ** power)
-
+        if -1 > power > 0:
+            return Fraction(self.nominator ** power, self.denominator ** power)
+        else:
+            return self.nominator ** power / self.denominator ** power
+        
     def __str__(self) -> str:
         if self.denominator != 1:
             return f"{self.nominator}/{self.denominator}"
