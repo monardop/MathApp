@@ -34,14 +34,23 @@ class Fraction:
 
         return int(nominator), int(denominator)
 
+    def get_mix_fraction(self) -> str:
+        if self.nominator < self.denominator:
+            return self
+        int_part: int = self.nominator // self.denominator
+        b = Fraction(int_part * self.denominator, self.denominator)
+        return f"{int_part} {self - b}"
+
     def __add__(self, fraction):
-        if fraction is int:
-            new_nominator = self.nominator + fraction * self.denominator
-            new_denominator = self.denominator
-        else:
+        try:
             new_nominator = (self.nominator * fraction.denominator
-                             + fraction.nominator * self.denominator)
+                                 + fraction.nominator * self.denominator)
             new_denominator = self.denominator * fraction.denominator
+        except AttributeError:
+            a = Fraction(fraction, 1)
+            new_nominator = (self.nominator * a.denominator
+                             + a.nominator * self.denominator)
+            new_denominator = self.denominator * a.denominator
 
         return Fraction(new_nominator, new_denominator)
 
@@ -99,7 +108,5 @@ def get_decimal(fraction: Fraction) -> float:
     return fraction.nominator / fraction.denominator
 
 
-def get_mix_fraction(fraction: Fraction) -> str:
-    pass
-    # TODO: mixed fractions
-    # TODO: create a function that add/sub ints to fractions
+
+
