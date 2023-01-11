@@ -1,5 +1,6 @@
 import fractions as fr
 
-a = fr.Fraction(390, 65)
-b = fr.Fraction(340, 550)
-print(a + 4)
+
+c = fr.Fraction(32, 9)
+print(c.get_mix_fraction())
+print(c + 2)
