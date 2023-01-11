@@ -87,7 +87,7 @@ class Fraction:
 
         return Fraction(new_nominator, new_denominator)
 
-    def __pow__(self, power: int):
+    def __pow__(self, power):
         return Fraction(self.nominator ** power, self.denominator ** power)
 
     def __str__(self) -> str:
@@ -95,6 +95,9 @@ class Fraction:
             return f"{self.nominator}/{self.denominator}"
         else:
             return f"{self.nominator}"
+
+    def get_decimal(self) -> float:
+        return self.nominator / self.denominator
 
 
 def create_fraction(number: float) -> Fraction:
@@ -110,23 +113,3 @@ def create_fraction(number: float) -> Fraction:
     nominator = number * denominator
 
     return Fraction(nominator, denominator)
-
-
-def sqrt(fraction: Fraction) -> float:
-    new_nom = fraction.nominator ** (1 / 2)
-    new_den = fraction.denominator ** (1 / 2)
-    return new_nom / new_den
-
-
-def cube_root(fraction: Fraction) -> float:
-    new_nom = fraction.nominator ** (1 / 3)
-    new_den = fraction.denominator ** (1 / 3)
-    return new_nom / new_den
-
-
-def get_decimal(fraction: Fraction) -> float:
-    return fraction.nominator / fraction.denominator
-
-
-
-
