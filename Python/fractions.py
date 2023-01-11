@@ -55,15 +55,35 @@ class Fraction:
         return Fraction(new_nominator, new_denominator)
 
     def __sub__(self, fraction):
-        new_nominator = (self.nominator * fraction.denominator
-                         - fraction.nominator * self.denominator)
-        new_denominator = self.denominator * fraction.denominator
+        try:
+            new_nominator = (self.nominator * fraction.denominator
+                             - fraction.nominator * self.denominator)
+            new_denominator = self.denominator * fraction.denominator
+        except AttributeError:
+            a = Fraction(fraction, 1)
+            new_nominator = (self.nominator * a.denominator
+                             - a.nominator * self.denominator)
+            new_denominator = self.denominator * a.denominator
 
         return Fraction(new_nominator, new_denominator)
 
     def __mul__(self, fraction):
-        new_nominator = self.nominator * fraction.nominator
-        new_denominator = self.denominator * fraction.denominator
+        try:
+            new_nominator = self.nominator * fraction.nominator
+            new_denominator = self.denominator * fraction.denominator
+        except AttributeError:
+            new_nominator = self.nominator * fraction
+            new_denominator = self.denominator
+
+        return Fraction(new_nominator, new_denominator)
+
+    def __truediv__(self, other):
+        try:
+            new_nominator = self.nominator * other.denominator
+            new_denominator = self.denominator * other.denominator
+        except AttributeError:
+            new_nominator = self.nominator
+            new_denominator = self.denominator * other
 
         return Fraction(new_nominator, new_denominator)
 
