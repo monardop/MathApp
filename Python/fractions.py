@@ -92,7 +92,7 @@ class Fraction:
             return Fraction(self.nominator ** power, self.denominator ** power)
         else:
             return self.nominator ** power / self.denominator ** power
-        
+
     def __str__(self) -> str:
         if self.denominator != 1:
             return f"{self.nominator}/{self.denominator}"
