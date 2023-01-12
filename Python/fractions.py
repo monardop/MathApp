@@ -80,7 +80,7 @@ class Fraction:
     def __truediv__(self, other):
         try:
             new_nominator = self.nominator * other.denominator
-            new_denominator = self.denominator * other.denominator
+            new_denominator = self.denominator * other.nominator
         except AttributeError:
             new_nominator = self.nominator
             new_denominator = self.denominator * other
