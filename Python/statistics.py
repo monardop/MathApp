@@ -9,9 +9,9 @@ class Statistics:
         values = {}
         for n in self.sample:
             if n in values:
-                values[n]+=1
+                values[n] += 1
             else:
-                values[n]=1
+                values[n] = 1
         print(values)
         mode = 0
         pos = 0
@@ -33,6 +33,6 @@ class Statistics:
         if quantity % 2 != 0:
             return self.sample[(quantity//2)-1]
         else:
-            return self.sample[((quantity//2 - 1)+(quantity//2))/2]
+            return self.sample[((quantity//2 - 1)+(quantity//2))//2]
 
 
